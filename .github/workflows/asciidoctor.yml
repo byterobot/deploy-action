@@ -1,0 +1,19 @@
+name: Asciidoctor Test
+
+on:
+  push:
+    branch:
+      - no_branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build HTML
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install
+        run: |
+          gem install asciidoctor-html5s
+          asciidoctor -r asciidoctor-html5s -b html5s -a linkcss test.adoc -o output.html
+          cat output.html
